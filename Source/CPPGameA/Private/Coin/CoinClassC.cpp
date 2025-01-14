@@ -10,7 +10,10 @@ ACoinClassC::ACoinClassC()
 	PrimaryActorTick.bCanEverTick = true;
 
 	CoinMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("CoinMesh"));
-	RootComponent = CoinMesh;
+	CoinMesh->SetupAttachment(GetRootComponent());
+
+	CoinMesh->SetWorldRotation(FRotator(90.f, 0.f, 0.f));
+	CoinMesh->SetWorldScale3D(FVector(0.5f, 0.5f, 0.05f));
 
 }
 
