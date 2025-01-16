@@ -31,6 +31,19 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Coin Properties")
 	int32 TimeRemaining = 10.f;
 
+	//Logic coin
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int32 CoinsNeededCPP = 5;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int32 CoinsGhateredCPP;
+
+	UFUNCTION()
+	void CoinCounterCPP();
+
+	// End Logic coin
+
 	//Tick all
 	virtual void Tick(float DeltaSeconds) override;
 	

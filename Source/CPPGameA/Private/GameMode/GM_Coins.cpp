@@ -55,6 +55,11 @@ void AGM_Coins::CallTimerUpdater()
 	}
 }
 
+void AGM_Coins::CoinCounterCPP()
+{
+	CoinsGhateredCPP++;
+}
+
 void AGM_Coins::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
