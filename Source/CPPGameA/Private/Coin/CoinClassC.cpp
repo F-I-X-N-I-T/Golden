@@ -15,12 +15,18 @@ ACoinClassC::ACoinClassC()
 	CoinMesh->SetWorldRotation(FRotator(90.f, 0.f, 0.f));
 	CoinMesh->SetWorldScale3D(FVector(0.5f, 0.5f, 0.05f));
 
+	CoinMesh->OnComponentBeginOverlap.AddDynamic(this, &ACoinClassC::CoinMeshBeginOverlap);
+
 }
 
 void ACoinClassC::CoinMeshBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	
+	if (GEngine)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Overlap"));
+	}
+	Destroy();
 }
 
 // Called when the game starts or when spawned
