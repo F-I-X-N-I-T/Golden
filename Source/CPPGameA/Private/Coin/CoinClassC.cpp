@@ -3,6 +3,9 @@
 
 #include "Coin/CoinClassC.h"
 
+#include "GameMode/GM_Coins.h"
+#include "Kismet/GameplayStatics.h"
+
 // Sets default values
 ACoinClassC::ACoinClassC()
 {
@@ -22,10 +25,22 @@ ACoinClassC::ACoinClassC()
 void ACoinClassC::CoinMeshBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if (GEngine)
+	UWorld* World = GetWorld();
+	if (World)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Overlap"));
+		AGameModeBase* GameModeRef = UGameplayStatics::GetGameMode(World);
+		
+		if (GameModeRef)
+		{
+			AGM_Coins* GameModeCast = Cast<AGM_Coins>(GameModeRef);
+			
+			if (GameModeCast)
+			{
+				GameModeCast->CoinCounterCPP();
+			}
+		}
 	}
+	
 	Destroy();
 }
 
