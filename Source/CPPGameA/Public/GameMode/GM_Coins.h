@@ -35,10 +35,13 @@ public:
 	int32 CoinsNeededCPP = 5;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	int32 CoinsGhateredCPP;
+	int32 CoinsGhateredCPP = 0;
 
 	UFUNCTION()
 	void CoinCounterCPP();
+
+	UFUNCTION()
+	void WinningConditionCheck();
 
 	// End Logic coin
 

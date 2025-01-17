@@ -74,6 +74,38 @@ void AGM_Coins::CoinCounterCPP()
 				GameMode->ProcessEvent(BPFunction, nullptr);
 			}
 		}
+
+		WinningConditionCheck();
+	}
+}
+
+void AGM_Coins::WinningConditionCheck()
+{
+	if (CoinsGhateredCPP == CoinsNeededCPP)
+	{
+		UWorld* World = GetWorld();
+		
+		if (World)
+		{
+			AGameModeBase* GameMode = UGameplayStatics::GetGameMode(World);
+
+			if (GameMode)
+			{
+				UFunction* BPFunction = GameMode->FindFunction(FName("WinningCondition"));
+
+				if (BPFunction)
+				{
+					GameMode->ProcessEvent(BPFunction, nullptr);
+				}
+			}
+		}
+	}
+	else
+	{
+		if (GEngine)
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("You need more coins!"));
+		}
 	}
 }
 
