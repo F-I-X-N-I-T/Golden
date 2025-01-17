@@ -25,8 +25,6 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void CallTimerUpdater();
-	
-	UWorld* World = GetWorld();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Coin Properties")
 	int32 TimeRemaining = 10.f;

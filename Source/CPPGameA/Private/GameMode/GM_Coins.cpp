@@ -36,6 +36,7 @@ void AGM_Coins::CountDownTickStop()
 
 void AGM_Coins::CallTimerUpdater()
 {
+	UWorld* World = GetWorld();
 	if (World)
 	{
 		// Get the GameMode Actually
@@ -58,6 +59,22 @@ void AGM_Coins::CallTimerUpdater()
 void AGM_Coins::CoinCounterCPP()
 {
 	CoinsGhateredCPP++;
+
+	UWorld* World = GetWorld();
+	if (World)
+	{
+		AGameModeBase* GameMode = UGameplayStatics::GetGameMode(World);
+
+		if (GameMode)
+		{
+			UFunction* BPFunction = GameMode->FindFunction(FName("CoinsGhateredUpdate"));
+
+			if (BPFunction)
+			{
+				GameMode->ProcessEvent(BPFunction, nullptr);
+			}
+		}
+	}
 }
 
 void AGM_Coins::Tick(float DeltaSeconds)
