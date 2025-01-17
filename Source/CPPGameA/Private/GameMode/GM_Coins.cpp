@@ -91,11 +91,14 @@ void AGM_Coins::WinningConditionCheck()
 
 			if (GameMode)
 			{
-				UFunction* BPFunction = GameMode->FindFunction(FName("WinningCondition"));
+				UFunction* BPFunctionWin = GameMode->FindFunction(FName("WinningCondition"));
+				UFunction* BPFunctionWinMessage = GameMode->FindFunction(FName("ShowMessageWinHud"));
 
-				if (BPFunction)
+				if (BPFunctionWin && BPFunctionWinMessage)
 				{
-					GameMode->ProcessEvent(BPFunction, nullptr);
+					GameMode->ProcessEvent(BPFunctionWin, nullptr);
+
+					GameMode->ProcessEvent(BPFunctionWinMessage, nullptr);
 				}
 			}
 		}
