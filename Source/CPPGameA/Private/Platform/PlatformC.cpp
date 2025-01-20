@@ -18,6 +18,9 @@ APlatformC::APlatformC()
 void APlatformC::BeginPlay()
 {
 	Super::BeginPlay();
+
+	InitialLocation = GetActorLocation();
+	CurrentLocation = InitialLocation;
 	
 }
 
@@ -26,5 +29,13 @@ void APlatformC::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	CurrentLocation = CurrentLocation + (DirectionMovement * Speed * DeltaTime);
+
+	SetActorLocation(CurrentLocation);
+
+	if (FVector::Dist(InitialLocation, CurrentLocation) >= MaxDistance)
+	{
+		DirectionMovement *= -1;
+	}
 }
 
