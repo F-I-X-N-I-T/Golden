@@ -24,10 +24,7 @@ void ADeadPlayerCheckC::BoxDeadBeginOverlap(class UPrimitiveComponent* Overlappe
 	{
 		if (OtherActor->Tags.Contains(PlayerTag))
 		{
-			if (GEngine)
-			{
-				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Player1A with PlayerTag is dead"));
-			}
+			OtherActor->SetActorLocation(DeadPlayerCheckPoints[FMath::RandRange(0,DeadPlayerCheckPoints.Num() - 1)]->GetActorLocation());
 		}
 	}
 }

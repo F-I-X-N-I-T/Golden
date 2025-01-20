@@ -35,6 +35,7 @@ void APlatformC::Tick(float DeltaTime)
 
 	if (FVector::Dist(InitialLocation, CurrentLocation) >= MaxDistance)
 	{
+		InitialLocation = CurrentLocation;
 		DirectionMovement *= -1;
 	}
 }
