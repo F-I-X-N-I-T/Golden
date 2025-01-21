@@ -25,23 +25,25 @@ ACoinClassC::ACoinClassC()
 void ACoinClassC::CoinMeshBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	UWorld* World = GetWorld();
-	if (World)
+	if (OtherActor)
 	{
-		AGameModeBase* GameModeRef = UGameplayStatics::GetGameMode(World);
-		
-		if (GameModeRef)
+		UWorld* World = GetWorld();
+		if (World)
 		{
-			AGM_Coins* GameModeCast = Cast<AGM_Coins>(GameModeRef);
-			
-			if (GameModeCast)
+			AGameModeBase* GameModeRef = UGameplayStatics::GetGameMode(World);
+		
+			if (GameModeRef)
 			{
-				GameModeCast->CoinCounterCPP();
+				AGM_Coins* GameModeCast = Cast<AGM_Coins>(GameModeRef);
+			
+				if (GameModeCast)
+				{
+					GameModeCast->CoinCounterCPP();
+				}
 			}
 		}
+		Destroy();
 	}
-	
-	Destroy();
 }
 
 // Called when the game starts or when spawned

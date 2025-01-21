@@ -64,7 +64,7 @@ void AGM_Coins::CoinCounterCPP()
 	if (World)
 	{
 		AGameModeBase* GameMode = UGameplayStatics::GetGameMode(World);
-
+		
 		if (GameMode)
 		{
 			UFunction* BPFunction = GameMode->FindFunction(FName("CoinsGhateredUpdate"));
