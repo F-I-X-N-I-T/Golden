@@ -21,8 +21,6 @@ ACoinClassC::ACoinClassC()
 
 	CoinMesh->OnComponentBeginOverlap.AddDynamic(this, &ACoinClassC::CoinMeshBeginOverlap);
 
-	CoinAudioComponent = CreateDefaultSubobject<UAudioComponent>(TEXT("CoinSound"));
-
 }
 
 void ACoinClassC::CoinMeshBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
@@ -42,20 +40,15 @@ void ACoinClassC::CoinMeshBeginOverlap(UPrimitiveComponent* OverlappedComponent,
 				if (GameModeCast)
 				{
 					GameModeCast->CoinCounterCPP();
+
+					if (CoinSound)
+					{
+						UGameplayStatics::PlaySound2D(GetWorld(), CoinSound);
+					}
 				}
 			}
 		}
-		//PlayCoinSound(); Error when executing the pickup audio.
 		Destroy();
-	}
-}
-
-void ACoinClassC::PlayCoinSound()
-{
-	if (CoinSound)
-	{
-		CoinAudioComponent->SetSound(CoinSound);
-		CoinAudioComponent->Play();
 	}
 }
 
