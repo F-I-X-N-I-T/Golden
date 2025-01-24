@@ -57,6 +57,9 @@ public:
 
 	UFUNCTION()
 	void GetAllCoinsInWorld(TSubclassOf<AActor> ActorClass);
+
+	UFUNCTION()
+	void DisablePlayerInput(APawn* Player);
 	
 protected:
 

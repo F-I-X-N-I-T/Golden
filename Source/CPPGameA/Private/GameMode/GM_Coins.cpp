@@ -116,6 +116,17 @@ void AGM_Coins::WinningConditionCheck()
 					GameMode->ProcessEvent(BPFunctionWin, nullptr);
 
 					GameMode->ProcessEvent(BPFunctionWinMessage, nullptr);
+
+					//Disable Input Player
+					APlayerController* PlayerController = World->GetFirstPlayerController();
+					if (PlayerController)
+					{
+						APawn* Player = PlayerController->GetPawn();
+						if (Player)
+						{
+							DisablePlayerInput(Player);
+						}
+					}
 				}
 			}
 		}
@@ -148,6 +159,19 @@ void AGM_Coins::GetAllCoinsInWorld(TSubclassOf<AActor> ActorClass)
 		UGameplayStatics::GetAllActorsOfClass(World, ActorClass, FoundCoins);
 		
 		CoinsFound = FoundCoins.Num();
+	}
+}
+
+void AGM_Coins::DisablePlayerInput(APawn* Player)
+{
+	if (Player)
+	{
+		APlayerController* PlayerController = Cast<APlayerController>(Player->GetController());
+
+		if (PlayerController)
+		{
+			Player->DisableInput(PlayerController);
+		}
 	}
 }
 
