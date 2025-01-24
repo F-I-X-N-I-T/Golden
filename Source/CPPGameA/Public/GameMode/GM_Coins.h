@@ -24,7 +24,7 @@ public:
 	void CountDownTickStop();
 
 	UFUNCTION(BlueprintCallable)
-	void CallTimerUpdater();
+	void CallTimerUpdate();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Coin Properties")
 	int32 TimeRemaining = 10.f;
@@ -44,6 +44,27 @@ public:
 	void WinningConditionCheck();
 
 	// End Logic coin
+
+	// Logic Sound
+	
+	UFUNCTION(BlueprintCallable)
+	void FadeOutMusic(float FadeOutDuration);
+	
+	// End Logic Sound
+protected:
+
+	// Logic Sound
+	
+	UPROPERTY(EditAnywhere, Category = "Sound")
+	USoundBase* MusicSound;
+
+	UPROPERTY()
+	UAudioComponent* MusicAudioComponent;
+
+	UPROPERTY(EditAnywhere, Category = "Sound")
+	float FadeOutTime = 0.4f;
+	
+	// End Logic Sound
 
 	//Tick all
 	virtual void Tick(float DeltaSeconds) override;

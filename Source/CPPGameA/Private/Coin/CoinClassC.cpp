@@ -3,6 +3,7 @@
 
 #include "Coin/CoinClassC.h"
 
+#include "Components/AudioComponent.h"
 #include "GameMode/GM_Coins.h"
 #include "Kismet/GameplayStatics.h"
 
@@ -19,6 +20,8 @@ ACoinClassC::ACoinClassC()
 	CoinMesh->SetWorldScale3D(FVector(0.5f, 0.5f, 0.05f));
 
 	CoinMesh->OnComponentBeginOverlap.AddDynamic(this, &ACoinClassC::CoinMeshBeginOverlap);
+
+	CoinAudioComponent = CreateDefaultSubobject<UAudioComponent>(TEXT("CoinSound"));
 
 }
 
@@ -42,7 +45,17 @@ void ACoinClassC::CoinMeshBeginOverlap(UPrimitiveComponent* OverlappedComponent,
 				}
 			}
 		}
+		//PlayCoinSound(); Error when executing the pickup audio.
 		Destroy();
+	}
+}
+
+void ACoinClassC::PlayCoinSound()
+{
+	if (CoinSound)
+	{
+		CoinAudioComponent->SetSound(CoinSound);
+		CoinAudioComponent->Play();
 	}
 }
 
