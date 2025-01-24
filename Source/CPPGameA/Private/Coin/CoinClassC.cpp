@@ -3,7 +3,6 @@
 
 #include "Coin/CoinClassC.h"
 
-#include "Components/AudioComponent.h"
 #include "GameMode/GM_Coins.h"
 #include "Kismet/GameplayStatics.h"
 

@@ -51,6 +51,13 @@ public:
 	void FadeOutMusic(float FadeOutDuration);
 	
 	// End Logic Sound
+
+	UPROPERTY(BlueprintReadOnly)
+	int32 CoinsFound = 0;
+
+	UFUNCTION()
+	void GetAllCoinsInWorld(TSubclassOf<AActor> ActorClass);
+	
 protected:
 
 	// Logic Sound

@@ -3,6 +3,7 @@
 
 #include "GameMode/GM_Coins.h"
 
+#include "Coin/CoinClassC.h"
 #include "Components/AudioComponent.h"
 #include "Kismet/GameplayStatics.h"
 
@@ -16,19 +17,24 @@ AGM_Coins::AGM_Coins()
 void AGM_Coins::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	//This function gets the class of the main actor and then looks for the subclass to find the array I need.
+	GetAllCoinsInWorld(ACoinClassC::StaticClass());
+
+	//Timer
 	GetWorldTimerManager().SetTimer(TimerHandleDown, this, &AGM_Coins::CountDownTickStop, 1.f, true);
 	
 	//We use it to “Set” the variable, we can use it here in c++ or in bp for something
 	//I put it as BlueprintCallable, but it looks ugly in bp xd
 	CallTimerUpdate();
 
+	//Music
 	if (MusicSound)
 	{
 		MusicAudioComponent->SetSound(MusicSound);
 		MusicAudioComponent->Play();
 	}
-
+	
 }
 
 void AGM_Coins::CountDownTickStop()
@@ -128,6 +134,20 @@ void AGM_Coins::FadeOutMusic(float FadeOutDuration)
 	if (MusicAudioComponent)
 	{
 		MusicAudioComponent->FadeOut(FadeOutDuration, 0.f);
+	}
+}
+
+void AGM_Coins::GetAllCoinsInWorld(TSubclassOf<AActor> ActorClass)
+{
+	TArray<AActor*> FoundCoins;
+	
+	UWorld* World = GetWorld();
+	
+	if (World)
+	{
+		UGameplayStatics::GetAllActorsOfClass(World, ActorClass, FoundCoins);
+		
+		CoinsFound = FoundCoins.Num();
 	}
 }
 
