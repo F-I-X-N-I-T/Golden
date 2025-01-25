@@ -11,7 +11,7 @@ APlatformC::APlatformC()
 
 	PlatformMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Platform Mesh"));
 	PlatformMesh->SetupAttachment(GetRootComponent());
-
+	
 }
 
 // Called when the game starts or when spawned
