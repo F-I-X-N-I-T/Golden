@@ -97,7 +97,7 @@ void AGM_Coins::CoinCounterCPP()
 
 void AGM_Coins::WinningConditionCheck()
 {
-	if (CoinsGhateredCPP == CoinsNeededCPP)
+	if (CoinsGhateredCPP == CoinsFound)
 	{
 		UWorld* World = GetWorld();
 		
