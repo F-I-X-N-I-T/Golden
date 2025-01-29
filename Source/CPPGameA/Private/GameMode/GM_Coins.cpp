@@ -12,6 +12,9 @@ AGM_Coins::AGM_Coins()
 	PrimaryActorTick.bCanEverTick = true;
 
 	MusicAudioComponent = CreateDefaultSubobject<UAudioComponent>(TEXT("AudioComponent"));
+	WinningAudioComponent = CreateDefaultSubobject<UAudioComponent>(TEXT("WinningAudioComponent"));
+
+	WinningAudioComponent->bAutoActivate = false;
 }
 
 void AGM_Coins::BeginPlay()
@@ -33,6 +36,11 @@ void AGM_Coins::BeginPlay()
 	{
 		MusicAudioComponent->SetSound(MusicSound);
 		MusicAudioComponent->Play();
+	}
+
+	if (WinningMusicSound)
+	{
+		WinningAudioComponent->SetSound(WinningMusicSound);
 	}
 	
 }
@@ -125,17 +133,12 @@ void AGM_Coins::WinningConditionCheck()
 						if (Player)
 						{
 							DisablePlayerInput(Player);
+							WinningAudioComponent->Play();
+							GetWorldTimerManager().ClearTimer(TimerHandleDown);
 						}
 					}
 				}
 			}
-		}
-	}
-	else
-	{
-		if (GEngine)
-		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("You need more coins!"));
 		}
 	}
 }

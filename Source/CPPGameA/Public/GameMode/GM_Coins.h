@@ -68,8 +68,14 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Sound")
 	USoundBase* MusicSound;
 
-	UPROPERTY()
+	UPROPERTY(BlueprintReadOnly)
 	UAudioComponent* MusicAudioComponent;
+
+	UPROPERTY(EditAnywhere, Category = "Sound")
+	USoundBase* WinningMusicSound;
+
+	UPROPERTY(BlueprintReadOnly)
+	UAudioComponent* WinningAudioComponent;
 
 	UPROPERTY(EditAnywhere, Category = "Sound")
 	float FadeOutTime = 0.4f;
